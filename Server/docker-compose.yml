@@ -1,0 +1,79 @@
+services:
+  influxdb:
+    hostname: influxdb
+    # use the official influxdb container image
+    image: influxdb:latest
+    # restart the container if a crash occurs but stop when stopped by user
+    restart: unless-stopped
+    # only expose the port of the influxdb docker container for the local machine
+    ports:
+      - '127.0.0.1:8086:8086'
+    volumes:
+      # mount three named volumes for data persistence which are managed by docker
+      - influxdb-storage:/var/lib/influxdb
+      - influxdb2lib-storage:/var/lib/influxdb2
+      - influxdb2etc-storage:/etc/influxdb2
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      # set the time zone
+      - TZ=Europe/Vienna
+      # influxdb specific environment variables
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+    # check if the container is still alive by querying the included webserver 
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:8086"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  api-crawler:
+    hostname: api-crawler
+    # build the container from the dockerfile in this directory
+    build: api-crawler
+    # start after the  container
+    depends_on:
+    - influxdb
+    # restart the container if a crash occurs but stop when stopped by user
+    restart: unless-stopped
+    environment:
+      # set the time zone
+      - TZ=Europe/Vienna
+    volumes:
+      - ./api-crawler/api-crawler.py:/api-crawler.py
+      - ./api-crawler/iss-tracker.log:/iss-tracker.log
+      - ./api-crawler/config.ini:/config.ini
+      - ./api-crawler/open-notify-iss-api-schema.json:/open-notify-iss-api-schema.json
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  api-provider:
+    hostname: api-provider
+    # build the container from the dockerfile in this directory
+    build: api-provider
+    # start after the  container
+    depends_on:
+    - influxdb
+    # restart the container if a crash occurs but stop when stopped by user
+    restart: unless-stopped
+    environment:
+      # set the time zone
+      - TZ=Europe/Vienna
+    ports:
+      - ':8000:8000'
+    volumes:
+      - ./api-provider/api-provider.py:/api-provider.py
+      - ./api-provider/iss-tracker.log:/iss-tracker.log
+      - ./api-provider/config.ini:/config.ini
+      - ./api-provider/cert.pem:/cert.pem
+      - ./api-provider/key.pem:/key.pem
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+volumes:
+  influxdb-storage:
+  influxdb2lib-storage:
+  influxdb2etc-storage:
