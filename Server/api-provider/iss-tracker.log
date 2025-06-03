@@ -1,16 +1,16 @@
-2025-05-31 01:58:43,161 INFO: Logging setup complete
-2025-05-31 01:58:43,168 INFO: InfluxDB Reader instance created
-2025-05-31 01:58:43,168 INFO: Initializing application {http://technikum-wien.at/mwi/integration-project/group5/position-history-service}PositionHistoryServiceApplication...
-2025-05-31 01:58:43,173 INFO: PositionHistoryServiceApplication instance created
-2025-05-31 01:58:43,174 INFO: Server instance created
-2025-05-31 01:58:43,178 INFO: SSL context created
-2025-05-31 01:58:43,178 INFO: Starting server loop
-2025-05-31 01:58:51,106 INFO: 192.168.1.1 [31/May/2025:00:58:51 +0100] "GET /?wsdl HTTP/1.1" 200 5565 "-" "Zeep/4.3.1 (www.python-zeep.org)"
-2025-05-31 01:58:51,145 INFO: Received request for closest entry by timestamp 1748638740
-2025-05-31 01:58:51,145 INFO: Querying data from 1748638680 to 1748638800
-2025-05-31 01:58:51,167 INFO: Query executed successfully: 
-                from(bucket: "iss_tb")
-                    |> range(start: 1748638680, stop: 1748638800)
+2025-06-03 01:49:49,462 INFO: Logging setup complete
+2025-06-03 01:49:49,471 INFO: InfluxDB Reader instance created
+2025-06-03 01:49:49,472 INFO: Initializing application {http://technikum-wien.at/mwi/integration-project/group5/position-history-service}PositionHistoryServiceApplication...
+2025-06-03 01:49:49,489 INFO: PositionHistoryServiceApplication instance created
+2025-06-03 01:49:49,490 INFO: Server instance created
+2025-06-03 01:49:49,494 INFO: SSL context created
+2025-06-03 01:49:49,494 INFO: Starting server loop
+2025-06-03 01:49:50,853 INFO: 192.168.1.1 [03/Jun/2025:00:49:50 +0100] "GET /?wsdl HTTP/1.1" 200 5565 "-" "Zeep/4.3.1 (www.python-zeep.org)"
+2025-06-03 01:51:10,799 INFO: Received request for closest entry by timestamp 1748908200
+2025-06-03 01:51:10,799 INFO: Querying data from 1748908140 to 1748908260
+2025-06-03 01:51:10,864 INFO: Query executed successfully: 
+                from(bucket: "bucket_iss")
+                    |> range(start: 1748908140, stop: 1748908260)
                     |> filter(fn: (r) => r._measurement == "iss_position_measurement")
                     |> filter(fn: (r) => r.source == "open-notify.org")
                     |> filter(fn: (r) => r._field == "latitude" or r._field == "longitude")
@@ -20,31 +20,31 @@
                         valueColumn: "_value"
                     )
                 
-2025-05-31 01:58:51,167 INFO: Found 2 data points in the range 1748638680 to 1748638800
-2025-05-31 01:58:51,201 INFO: Data points DataFrame:
+2025-06-03 01:51:10,864 INFO: Found 1 data points in the range 1748908140 to 1748908260
+2025-06-03 01:51:10,902 INFO: Data points DataFrame:
     result  table  ... latitude longitude
-0  _result      0  ...  51.0294  -68.5272
-1  _result      0  ...  50.1903  -62.3925
+0  _result      0  ... -40.0888  -10.0221
 
-[2 rows x 9 columns]
-2025-05-31 01:58:51,208 INFO: Closest entry found: result                            _result
+[1 rows x 9 columns]
+2025-06-03 01:51:10,910 INFO: Closest entry found: result                            _result
 table                                   0
-_start          2025-05-30 20:58:00+00:00
-_stop           2025-05-30 21:00:00+00:00
-_time           2025-05-30 20:59:04+00:00
+_start          2025-06-02 23:49:00+00:00
+_stop           2025-06-02 23:51:00+00:00
+_time           2025-06-02 23:50:11+00:00
 _measurement     iss_position_measurement
 source                    open-notify.org
-latitude                          50.1903
-longitude                        -62.3925
-delta                     0 days 00:00:04
-Name: 1, dtype: object
-2025-05-31 01:58:51,208 INFO: Returning closest entry: LocationRecord(timestamp=1748638744, latitude=50.1903, longitude=-62.3925, source='open-notify.org')
-2025-05-31 01:58:51,211 INFO: 192.168.1.1 [31/May/2025:00:58:51 +0100] "POST / HTTP/1.1" 200 742 "-" "Zeep/4.3.1 (www.python-zeep.org)"
-2025-05-31 01:59:16,808 INFO: 192.168.1.1 [31/May/2025:00:59:16 +0100] "OPTIONS / HTTP/1.1" 200 295 "https://ntgddns.asuscomm.com:4443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
-2025-05-31 01:59:16,875 INFO: Received request for location history between 1748530800 and 1748531400
-2025-05-31 01:59:16,899 INFO: Query executed successfully: 
-                from(bucket: "iss_tb")
-                    |> range(start: 1748530800, stop: 1748531400)
+latitude                         -40.0888
+longitude                        -10.0221
+delta                     0 days 00:00:11
+Name: 0, dtype: object
+2025-06-03 01:51:10,910 INFO: Returning closest entry: LocationRecord(timestamp=1748908211, latitude=-40.0888, longitude=-10.0221, source='open-notify.org')
+2025-06-03 01:51:10,957 INFO: 192.168.1.1 [03/Jun/2025:00:51:10 +0100] "POST / HTTP/1.1" 200 743 "-" "Zeep/4.3.1 (www.python-zeep.org)"
+2025-06-03 01:51:16,164 INFO: 192.168.1.1 [03/Jun/2025:00:51:16 +0100] "OPTIONS / HTTP/1.1" 200 290 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:51:16,169 INFO: Received request for closest entry by timestamp 1748908200
+2025-06-03 01:51:16,169 INFO: Querying data from 1748908140 to 1748908260
+2025-06-03 01:51:16,192 INFO: Query executed successfully: 
+                from(bucket: "bucket_iss")
+                    |> range(start: 1748908140, stop: 1748908260)
                     |> filter(fn: (r) => r._measurement == "iss_position_measurement")
                     |> filter(fn: (r) => r.source == "open-notify.org")
                     |> filter(fn: (r) => r._field == "latitude" or r._field == "longitude")
@@ -54,14 +54,126 @@ Name: 1, dtype: object
                         valueColumn: "_value"
                     )
                 
-2025-05-31 01:59:16,900 INFO: Yielding location record: LocationRecord(timestamp=1748530800, latitude=-25.9648, longitude=-96.0344, source='open-notify.org')
-2025-05-31 01:59:16,900 INFO: Yielding location record: LocationRecord(timestamp=1748530860, latitude=-23.107, longitude=-93.3556, source='open-notify.org')
-2025-05-31 01:59:16,901 INFO: Yielding location record: LocationRecord(timestamp=1748530921, latitude=-20.1726, longitude=-90.7793, source='open-notify.org')
-2025-05-31 01:59:16,902 INFO: Yielding location record: LocationRecord(timestamp=1748530984, latitude=-17.1205, longitude=-88.2488, source='open-notify.org')
-2025-05-31 01:59:16,902 INFO: Yielding location record: LocationRecord(timestamp=1748531041, latitude=-14.2791, longitude=-86.0009, source='open-notify.org')
-2025-05-31 01:59:16,903 INFO: Yielding location record: LocationRecord(timestamp=1748531099, latitude=-11.3872, longitude=-83.7965, source='open-notify.org')
-2025-05-31 01:59:16,903 INFO: Yielding location record: LocationRecord(timestamp=1748531161, latitude=-8.2989, longitude=-81.5126, source='open-notify.org')
-2025-05-31 01:59:16,904 INFO: Yielding location record: LocationRecord(timestamp=1748531220, latitude=-5.346, longitude=-79.377, source='open-notify.org')
-2025-05-31 01:59:16,905 INFO: Yielding location record: LocationRecord(timestamp=1748531282, latitude=-2.2064, longitude=-77.1381, source='open-notify.org')
-2025-05-31 01:59:16,905 INFO: Yielding location record: LocationRecord(timestamp=1748531341, latitude=0.8115, longitude=-74.9991, source='open-notify.org')
-2025-05-31 01:59:16,968 INFO: 192.168.1.1 [31/May/2025:00:59:16 +0100] "POST / HTTP/1.1" 200 2690 "https://ntgddns.asuscomm.com:4443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:51:16,192 INFO: Found 1 data points in the range 1748908140 to 1748908260
+2025-06-03 01:51:16,225 INFO: Data points DataFrame:
+    result  table  ... latitude longitude
+0  _result      0  ... -40.0888  -10.0221
+
+[1 rows x 9 columns]
+2025-06-03 01:51:16,231 INFO: Closest entry found: result                            _result
+table                                   0
+_start          2025-06-02 23:49:00+00:00
+_stop           2025-06-02 23:51:00+00:00
+_time           2025-06-02 23:50:11+00:00
+_measurement     iss_position_measurement
+source                    open-notify.org
+latitude                         -40.0888
+longitude                        -10.0221
+delta                     0 days 00:00:11
+Name: 0, dtype: object
+2025-06-03 01:51:16,232 INFO: Returning closest entry: LocationRecord(timestamp=1748908211, latitude=-40.0888, longitude=-10.0221, source='open-notify.org')
+2025-06-03 01:51:16,284 INFO: 192.168.1.1 [03/Jun/2025:00:51:16 +0100] "POST / HTTP/1.1" 200 901 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:54:45,111 INFO: 192.168.1.1 [03/Jun/2025:00:54:45 +0100] "OPTIONS / HTTP/1.1" 200 290 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:54:45,117 INFO: Received request for location history between 1748905200 and 1748908200
+2025-06-03 01:54:45,175 INFO: Query executed successfully: 
+                from(bucket: "bucket_iss")
+                    |> range(start: 1748905200, stop: 1748908200)
+                    |> filter(fn: (r) => r._measurement == "iss_position_measurement")
+                    |> filter(fn: (r) => r.source == "open-notify.org")
+                    |> filter(fn: (r) => r._field == "latitude" or r._field == "longitude")
+                    |> pivot(
+                        rowKey: ["_time"],
+                        columnKey: ["_field"],
+                        valueColumn: "_value"
+                    )
+                
+2025-06-03 01:54:45,230 INFO: 192.168.1.1 [03/Jun/2025:00:54:45 +0100] "POST / HTTP/1.1" 200 682 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:55:14,651 INFO: 192.168.1.1 [03/Jun/2025:00:55:14 +0100] "OPTIONS / HTTP/1.1" 200 290 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:55:14,656 INFO: Received request for location history between 1748908200 and 1748908200
+2025-06-03 01:55:14,674 ERROR: Failed to execute query: (400)
+Reason: Bad Request
+HTTP response headers: HTTPHeaderDict({'Content-Type': 'application/json; charset=utf-8', 'Vary': 'Accept-Encoding', 'X-Influxdb-Build': 'OSS', 'X-Influxdb-Version': 'v2.7.12', 'X-Platform-Error-Code': 'invalid', 'Date': 'Mon, 02 Jun 2025 23:55:14 GMT', 'Transfer-Encoding': 'chunked'})
+HTTP response body: b'{"code":"invalid","message":"error in building plan while starting program: cannot query an empty range"}'
+
+2025-06-03 01:55:14,675 ERROR: Failed to retrieve data from InfluxDB
+2025-06-03 01:55:14,737 INFO: 192.168.1.1 [03/Jun/2025:00:55:14 +0100] "POST / HTTP/1.1" 200 802 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 01:56:16,494 INFO: Received request for location history between 1748908200 and 1748908500
+2025-06-03 01:56:16,517 INFO: Query executed successfully: 
+                from(bucket: "bucket_iss")
+                    |> range(start: 1748908200, stop: 1748908500)
+                    |> filter(fn: (r) => r._measurement == "iss_position_measurement")
+                    |> filter(fn: (r) => r.source == "open-notify.org")
+                    |> filter(fn: (r) => r._field == "latitude" or r._field == "longitude")
+                    |> pivot(
+                        rowKey: ["_time"],
+                        columnKey: ["_field"],
+                        valueColumn: "_value"
+                    )
+                
+2025-06-03 01:56:16,518 INFO: Yielding location record: LocationRecord(timestamp=1748908211, latitude=-40.0888, longitude=-10.0221, source='open-notify.org')
+2025-06-03 01:56:16,519 INFO: Yielding location record: LocationRecord(timestamp=1748908260, latitude=-41.871, longitude=-6.8105, source='open-notify.org')
+2025-06-03 01:56:16,519 INFO: Yielding location record: LocationRecord(timestamp=1748908320, latitude=-43.9425, longitude=-2.5374, source='open-notify.org')
+2025-06-03 01:56:16,520 INFO: Yielding location record: LocationRecord(timestamp=1748908380, latitude=-45.8077, longitude=2.0072, source='open-notify.org')
+2025-06-03 01:56:16,520 INFO: Yielding location record: LocationRecord(timestamp=1748908441, latitude=-47.4713, longitude=6.9056, source='open-notify.org')
+2025-06-03 01:56:16,578 INFO: 192.168.1.1 [03/Jun/2025:00:56:16 +0100] "POST / HTTP/1.1" 200 1538 "-" "Zeep/4.3.1 (www.python-zeep.org)"
+2025-06-03 02:23:07,670 INFO: Received request for location history between 1748908800 and 1748910000
+2025-06-03 02:23:07,729 INFO: Query executed successfully: 
+                from(bucket: "bucket_iss")
+                    |> range(start: 1748908800, stop: 1748910000)
+                    |> filter(fn: (r) => r._measurement == "iss_position_measurement")
+                    |> filter(fn: (r) => r.source == "open-notify.org")
+                    |> filter(fn: (r) => r._field == "latitude" or r._field == "longitude")
+                    |> pivot(
+                        rowKey: ["_time"],
+                        columnKey: ["_field"],
+                        valueColumn: "_value"
+                    )
+                
+2025-06-03 02:23:07,729 INFO: Yielding location record: LocationRecord(timestamp=1748908800, latitude=-51.5003, longitude=40.9169, source='open-notify.org')
+2025-06-03 02:23:07,730 INFO: Yielding location record: LocationRecord(timestamp=1748908860, latitude=-51.0676, longitude=46.745, source='open-notify.org')
+2025-06-03 02:23:07,730 INFO: Yielding location record: LocationRecord(timestamp=1748908931, latitude=-50.1359, longitude=53.5729, source='open-notify.org')
+2025-06-03 02:23:07,731 INFO: Yielding location record: LocationRecord(timestamp=1748908991, latitude=-49.0406, longitude=59.0059, source='open-notify.org')
+2025-06-03 02:23:07,732 INFO: Yielding location record: LocationRecord(timestamp=1748909040, latitude=-47.9254, longitude=63.3182, source='open-notify.org')
+2025-06-03 02:23:07,732 INFO: Yielding location record: LocationRecord(timestamp=1748909111, latitude=-46.0476, longitude=69.1049, source='open-notify.org')
+2025-06-03 02:23:07,733 INFO: Yielding location record: LocationRecord(timestamp=1748909294, latitude=-39.8919, longitude=82.1154, source='open-notify.org')
+2025-06-03 02:23:07,733 INFO: Yielding location record: LocationRecord(timestamp=1748909341, latitude=-38.0653, longitude=85.0379, source='open-notify.org')
+2025-06-03 02:23:07,734 INFO: Yielding location record: LocationRecord(timestamp=1748909403, latitude=-35.5368, longitude=88.6581, source='open-notify.org')
+2025-06-03 02:23:07,734 INFO: Yielding location record: LocationRecord(timestamp=1748909460, latitude=-33.1088, longitude=91.7717, source='open-notify.org')
+2025-06-03 02:23:07,735 INFO: Yielding location record: LocationRecord(timestamp=1748909520, latitude=-30.4835, longitude=94.8266, source='open-notify.org')
+2025-06-03 02:23:07,736 INFO: Yielding location record: LocationRecord(timestamp=1748909580, latitude=-27.7559, longitude=97.7291, source='open-notify.org')
+2025-06-03 02:23:07,736 INFO: Yielding location record: LocationRecord(timestamp=1748909644, latitude=-24.7479, longitude=100.6757, source='open-notify.org')
+2025-06-03 02:23:07,737 INFO: Yielding location record: LocationRecord(timestamp=1748909834, latitude=-15.5708, longitude=108.5356, source='open-notify.org')
+2025-06-03 02:23:07,737 INFO: Yielding location record: LocationRecord(timestamp=1748909880, latitude=-13.3127, longitude=110.2913, source='open-notify.org')
+2025-06-03 02:23:07,738 INFO: Yielding location record: LocationRecord(timestamp=1748909951, latitude=-9.7353, longitude=112.9801, source='open-notify.org')
+2025-06-03 02:23:07,797 INFO: 192.168.1.1 [03/Jun/2025:01:23:07 +0100] "POST / HTTP/1.1" 200 3709 "-" "Zeep/4.3.1 (www.python-zeep.org)"
+2025-06-03 02:23:25,354 INFO: 192.168.1.1 [03/Jun/2025:01:23:25 +0100] "OPTIONS / HTTP/1.1" 200 290 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+2025-06-03 02:23:25,359 INFO: Received request for location history between 1748908800 and 1748910000
+2025-06-03 02:23:25,383 INFO: Query executed successfully: 
+                from(bucket: "bucket_iss")
+                    |> range(start: 1748908800, stop: 1748910000)
+                    |> filter(fn: (r) => r._measurement == "iss_position_measurement")
+                    |> filter(fn: (r) => r.source == "open-notify.org")
+                    |> filter(fn: (r) => r._field == "latitude" or r._field == "longitude")
+                    |> pivot(
+                        rowKey: ["_time"],
+                        columnKey: ["_field"],
+                        valueColumn: "_value"
+                    )
+                
+2025-06-03 02:23:25,383 INFO: Yielding location record: LocationRecord(timestamp=1748908800, latitude=-51.5003, longitude=40.9169, source='open-notify.org')
+2025-06-03 02:23:25,384 INFO: Yielding location record: LocationRecord(timestamp=1748908860, latitude=-51.0676, longitude=46.745, source='open-notify.org')
+2025-06-03 02:23:25,384 INFO: Yielding location record: LocationRecord(timestamp=1748908931, latitude=-50.1359, longitude=53.5729, source='open-notify.org')
+2025-06-03 02:23:25,385 INFO: Yielding location record: LocationRecord(timestamp=1748908991, latitude=-49.0406, longitude=59.0059, source='open-notify.org')
+2025-06-03 02:23:25,385 INFO: Yielding location record: LocationRecord(timestamp=1748909040, latitude=-47.9254, longitude=63.3182, source='open-notify.org')
+2025-06-03 02:23:25,386 INFO: Yielding location record: LocationRecord(timestamp=1748909111, latitude=-46.0476, longitude=69.1049, source='open-notify.org')
+2025-06-03 02:23:25,387 INFO: Yielding location record: LocationRecord(timestamp=1748909294, latitude=-39.8919, longitude=82.1154, source='open-notify.org')
+2025-06-03 02:23:25,387 INFO: Yielding location record: LocationRecord(timestamp=1748909341, latitude=-38.0653, longitude=85.0379, source='open-notify.org')
+2025-06-03 02:23:25,388 INFO: Yielding location record: LocationRecord(timestamp=1748909403, latitude=-35.5368, longitude=88.6581, source='open-notify.org')
+2025-06-03 02:23:25,388 INFO: Yielding location record: LocationRecord(timestamp=1748909460, latitude=-33.1088, longitude=91.7717, source='open-notify.org')
+2025-06-03 02:23:25,389 INFO: Yielding location record: LocationRecord(timestamp=1748909520, latitude=-30.4835, longitude=94.8266, source='open-notify.org')
+2025-06-03 02:23:25,389 INFO: Yielding location record: LocationRecord(timestamp=1748909580, latitude=-27.7559, longitude=97.7291, source='open-notify.org')
+2025-06-03 02:23:25,390 INFO: Yielding location record: LocationRecord(timestamp=1748909644, latitude=-24.7479, longitude=100.6757, source='open-notify.org')
+2025-06-03 02:23:25,390 INFO: Yielding location record: LocationRecord(timestamp=1748909834, latitude=-15.5708, longitude=108.5356, source='open-notify.org')
+2025-06-03 02:23:25,391 INFO: Yielding location record: LocationRecord(timestamp=1748909880, latitude=-13.3127, longitude=110.2913, source='open-notify.org')
+2025-06-03 02:23:25,392 INFO: Yielding location record: LocationRecord(timestamp=1748909951, latitude=-9.7353, longitude=112.9801, source='open-notify.org')
+2025-06-03 02:23:25,453 INFO: 192.168.1.1 [03/Jun/2025:01:23:25 +0100] "POST / HTTP/1.1" 200 3867 "https://ntgddns.asuscomm.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"

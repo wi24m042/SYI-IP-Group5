@@ -60,6 +60,9 @@ class PositionHistoryService(ServiceBase):
                 if len(data_points) == 0:
                     start_time -= 60
                     stop_time += 60
+                    if start_time < timestamp - 3600:
+                        logging.info(f"Expanded range to {start_time} to {stop_time}, but still no data points found")
+                        return None
                     logging.info(f"No data points found, expanding range to {start_time} to {stop_time}")
                 else:
                     points_df = pd.DataFrame(data_points)
@@ -81,8 +84,8 @@ class PositionHistoryService(ServiceBase):
                 return None
 
 class InfluxDBReader:
-    def __init__(self, url:str, token:str, org:str, bucket:str, measurement:str, source:str):
-        self.client = InfluxDBClient(url=url, token=token, org=org)
+    def __init__(self, url:str, token:str, org:str, bucket:str, measurement:str, source:str, ca_cert:str):
+        self.client = InfluxDBClient(url=url, token=token, org=org, ssl_ca_cert=ca_cert, verify_ssl=True)
         self.query_api = self.client.query_api()
         self.bucket = bucket
         self.org = org
@@ -144,7 +147,8 @@ class Main:
             org=self.config.get('influxdb', 'org'),
             bucket=self.config.get('influxdb', 'bucket'),
             measurement=self.config.get('influxdb', 'measurement'),
-            source=self.config.get('iss-api', 'source')
+            source=self.config.get('iss-api', 'source'),
+            ca_cert=self.config.get('influxdb', 'ca_cert')
         )
         logging.info("InfluxDB Reader instance created")
 
@@ -165,8 +169,9 @@ class Main:
         post_route = self.phs_web_app.router.add_post('/{tail:.*}', self.phs_handler.post)
         cors = aiohttp_cors.setup(
             self.phs_web_app,
-            defaults={
-                "https://ntgddns.asuscomm.com:4443": aiohttp_cors.ResourceOptions(
+            defaults =
+            {
+                "https://ntgddns.asuscomm.com": aiohttp_cors.ResourceOptions(
                     allow_credentials=True,
                     expose_headers="*",
                     allow_headers="*",
@@ -187,5 +192,6 @@ class Main:
         logging.info("Starting server loop")
         web.run_app(self.phs_web_app, port=self.config.getint('api-provider', 'port'), ssl_context=self.ssl_context)
 
-main = Main()
-main.server_loop()
+if __name__ == "__main__":
+    main = Main()
+    main.server_loop()

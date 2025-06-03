@@ -1,2 +1,8 @@
 # Ignore all .pem files
 *.pem
+*.crt
+*.key
+*.srl
+*.csr
+*.log
+*.conf

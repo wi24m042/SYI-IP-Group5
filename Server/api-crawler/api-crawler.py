@@ -92,8 +92,8 @@ class ISSCrawler:
             return None
 
 class InfluxDBWriter:
-    def __init__(self, url:str, token:str, org:str):
-        self.client = InfluxDBClient(url=url, token=token, org=org)
+    def __init__(self, url:str, token:str, org:str, ca_cert:str):
+        self.client = InfluxDBClient(url=url, token=token, org=org, ssl_ca_cert=ca_cert, verify_ssl=True)
         self.write_api = self.client.write_api(write_options=SYNCHRONOUS)
         self.org = org
 
@@ -142,7 +142,8 @@ class Main:
         self.influx_writer = InfluxDBWriter(
             url=self.config.get('influxdb', 'url'),
             token=self.config.get('influxdb', 'token'),
-            org=self.config.get('influxdb', 'org')
+            org=self.config.get('influxdb', 'org'),
+            ca_cert=self.config.get('influxdb', 'ca_cert')
         )
         logging.info("InfluxDB Writer instance created.")
 
@@ -165,9 +166,10 @@ class Main:
                 try_counter -= 1
                 logging.error("Failed to fetch or validate ISS data.")
 
-main = Main()
-logging.info("Starting ISS data crawler.")
-schedule.every().minute.at(":00").do(main.fetch_and_store_iss_data)
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+if __name__ == "__main__":
+    main = Main()
+    logging.info("Starting ISS data crawler.")
+    schedule.every().minute.at(":00").do(main.fetch_and_store_iss_data)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)

@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     # only expose the port of the influxdb docker container for the local machine
     ports:
-      - '127.0.0.1:8086:8086'
+      - '8086:8086'
     volumes:
       # mount three named volumes for data persistence which are managed by docker
       - influxdb-storage:/var/lib/influxdb
@@ -15,6 +15,8 @@ services:
       - influxdb2etc-storage:/etc/influxdb2
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - ./certs/influxdb.crt:/cert.pem
+      - ./certs/influxdb.key:/key.pem
     environment:
       # set the time zone
       - TZ=Europe/Vienna
@@ -24,9 +26,12 @@ services:
       - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
       - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
       - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+      - DOCKER_INFLUXDB_HTTPS_ENABLED=true
+      - INFLUXD_TLS_CERT=/cert.pem
+      - INFLUXD_TLS_KEY=/key.pem
     # check if the container is still alive by querying the included webserver 
     healthcheck:
-      test: ["CMD", "curl", "http://localhost:8086"]
+      test: ["CMD", "curl", "https://fhtw-ms-b09611.local:8086"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -46,7 +51,8 @@ services:
       - ./api-crawler/api-crawler.py:/api-crawler.py
       - ./api-crawler/iss-tracker.log:/iss-tracker.log
       - ./api-crawler/config.ini:/config.ini
-      - ./api-crawler/open-notify-iss-api-schema.json:/open-notify-iss-api-schema.json
+      - ./api-crawler/open-notify-iss-rest-api-schema.json:/open-notify-iss-rest-api-schema.json
+      - ./certs/ca.crt:/ca.pem
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
 
@@ -68,8 +74,34 @@ services:
       - ./api-provider/api-provider.py:/api-provider.py
       - ./api-provider/iss-tracker.log:/iss-tracker.log
       - ./api-provider/config.ini:/config.ini
-      - ./api-provider/cert.pem:/cert.pem
-      - ./api-provider/key.pem:/key.pem
+      - ./certs/public-cert.pem:/cert.pem
+      - ./certs/public-private-key.pem:/key.pem
+      - ./certs/ca.crt:/ca.pem
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  webserver:
+    hostname: webserver
+    # build the container from the dockerfile in this directory
+    build: webserver
+    # start after the  container
+    depends_on:
+    - api-provider
+    # restart the container if a crash occurs but stop when stopped by user
+    restart: unless-stopped
+    environment:
+      # set the time zone
+      - TZ=Europe/Vienna
+    ports:
+      - ':443:443'
+    volumes:
+      - ./webserver/webserver.py:/webserver.py
+      - ./webserver/iss-tracker.log:/iss-tracker.log
+      - ./webserver/config.ini:/config.ini
+      - ./webserver/position-history-service-rest-api-schema.json:/position-history-service-rest-api-schema.json
+      - ./webserver/html:/html
+      - ./certs/public-cert.pem:/cert.pem
+      - ./certs/public-private-key.pem:/key.pem
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
 
