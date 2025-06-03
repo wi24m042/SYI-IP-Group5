@@ -1,6 +1,9 @@
 # SYI-IP-Group5
 Systems Integration - Integration Project - Group 5
 
+# Logical Overview
+![LogicalOverview](LogicalOverview.drawio.svg)
+
 # Hardware Setup
 ## Physical Overview
 ![PhysicalOverview](PhysicalOverview.drawio.svg)
