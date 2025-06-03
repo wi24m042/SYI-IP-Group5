@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://technikum-wien.at/mwi/integration-project/group5/position-history-service",
+    "title": "PositionHistoryService",
+    "type": "object",
+    "properties": {
+        "PositionHistoryService": {
+            "type": "object",
+            "properties": {
+                "GetLocationHistory": {
+                    "type": "object",
+                    "properties": {
+                        "StartTime": {
+                            "type": "integer"
+                        },
+                        "StopTime": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": ["StartTime", "StopTime"]
+                },
+                "GetClosestEntryByTimestamp": {
+                    "type": "object",
+                    "properties": {
+                        "Timestamp": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": ["Timestamp"]
+                }
+            },
+            "anyOf": [
+                { "required": ["GetLocationHistory"] },
+                { "required": ["GetClosestEntryByTimestamp"] }
+            ]
+        }
+    }
+}
