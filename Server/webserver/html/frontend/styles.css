@@ -1,0 +1,144 @@
+
+:root {
+  --header-bg: #2f3542;    
+  --header-text: #e2e2e2;    
+  --sidebar-bg: #2c2f36; 
+  --accent-color: #4da6c3;
+  --accent-hover: #3b94af;
+  --text-light: #f1f1f1;
+}
+
+
+ body {
+  background-color: var(--sidebar-bg);
+  color: var(--text-light);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  margin-top: 10px;
+  color: var(--header-text);
+}
+
+header h3 {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+#sidebar {
+  background-color: var(--sidebar-bg);
+  min-width: 258px;
+  max-width: 258px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.btn-light {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-light:hover {
+  background-color: var(--accent-hover);
+}
+
+legend {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+fieldset {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+.form_legend {
+  color: var(--text-light);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input_datetime::placeholder {
+  color: #ffffff;
+  opacity: 1;
+}
+
+
+.input_datetime {
+  background-color: #2e3440;
+  color: #e8f0fa !important;       /* gut lesbar */
+  border: 1px solid #444c56;
+  font-size: 1rem;
+}
+
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+
+.form-control{
+  background-color: #3c3f41;
+
+}  
+#sidebarWrapper {
+  display: flex;
+  flex-direction: row;
+  transition: all 0.3s ease;
+}
+
+.sidebar.hidden {
+  display: none !important;
+}
+
+#sidebarToggle {
+  background-color: var(--header-bg);
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.hidden #sidebarToggle {
+  margin-left: -32px;
+}
+
+#toggleIcon {
+  transition: transform 0.3s ease;
+}
+
+.sidebar.hidden #toggleIcon {
+  transform: rotate(180deg);
+}
+
+
+
