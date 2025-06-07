@@ -204,7 +204,7 @@ function configureDateTimePicker(inputId, input, setSelectedValue)
     dateFormat: "d.m.Y H:i",
     time_24hr: true,
     maxDate: new Date(),
-    minDate: new Date(2025, 5, 2),
+    minDate: new Date(2025, 5, 2,2,0,0),
     onChange: function(selectedDates) 
     {
       if (selectedDates.length > 0) 
