@@ -128,8 +128,8 @@ function get_location_history()
   if (selectedOption.value == "rest")
   {
     const RestRequest = new Request(
-      "http://localhost:443/api/get_location_history",
-      //location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_location_history", 
+      //"http://localhost:443/api/get_location_history",
+      location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_location_history", 
       {
         method: 'POST',
         body: JSON.stringify({"PositionHistoryService": {"GetLocationHistory": {"StartTime": selectedStartTime, "StopTime": selectedStopTime}}}),
@@ -163,7 +163,8 @@ function get_closest_entry_by_timestamp()
   if (selectedOption.value == "rest")
   {
     const RestRequest = new Request(
-      location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_closest_entry_by_timestamp", 
+      location.protocol + "//" + location.hostname + ":" + location.port + "./api/get_closest_entry_by_timestamp", 
+      //"http://localhost:443/api/get_closest_entry_by_timestamp",
       {
         method: 'POST',
         body: JSON.stringify({"PositionHistoryService": {"GetClosestEntryByTimestamp": {"Timestamp": selectedTimestamp}}}),
@@ -203,6 +204,7 @@ function configureDateTimePicker(inputId, input, setSelectedValue)
     dateFormat: "d.m.Y H:i",
     time_24hr: true,
     maxDate: new Date(),
+    minDate: new Date(2025, 5, 2),
     onChange: function(selectedDates) 
     {
       if (selectedDates.length > 0) 
