@@ -84,13 +84,12 @@ fieldset {
 }
 
 
-.input_datetime {
+.input_datetime, .input_datetime:focus{
   background-color: #2e3440;
-  color: #e8f0fa !important;       /* gut lesbar */
+  color: #e8f0fa !important;
   border: 1px solid #444c56;
   font-size: 1rem;
 }
-
 
 #map {
   width: 100%;

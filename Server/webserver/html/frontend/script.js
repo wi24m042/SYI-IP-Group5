@@ -128,7 +128,6 @@ function get_location_history()
   if (selectedOption.value == "rest")
   {
     const RestRequest = new Request(
-      //"http://localhost:443/api/get_location_history",
       location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_location_history", 
       {
         method: 'POST',
@@ -163,8 +162,7 @@ function get_closest_entry_by_timestamp()
   if (selectedOption.value == "rest")
   {
     const RestRequest = new Request(
-      location.protocol + "//" + location.hostname + ":" + location.port + "./api/get_closest_entry_by_timestamp", 
-      //"http://localhost:443/api/get_closest_entry_by_timestamp",
+      location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_closest_entry_by_timestamp",
       {
         method: 'POST',
         body: JSON.stringify({"PositionHistoryService": {"GetClosestEntryByTimestamp": {"Timestamp": selectedTimestamp}}}),
@@ -203,8 +201,8 @@ function configureDateTimePicker(inputId, input, setSelectedValue)
     enableTime: true,
     dateFormat: "d.m.Y H:i",
     time_24hr: true,
-    maxDate: new Date(),
-    minDate: new Date(2025, 5, 2,2,0,0),
+    minuteIncrement: 1,
+    minDate: new Date(2025,5,2, 2,0,0),
     onChange: function(selectedDates) 
     {
       if (selectedDates.length > 0) 
@@ -222,6 +220,36 @@ function configureDateTimePicker(inputId, input, setSelectedValue)
       if (inputId == 'get_location_history_form_input_stoptime' && DatePickerStartTime) 
       {
         DatePickerStartTime.set('maxDate', selectedDates[0] || null);
+      }
+    },
+    onOpen: function(selectedDates, dateStr, instance)
+    {
+      if (inputId == 'get_closest_entry_by_timestamp_form_input_timestamp') 
+      {
+        currentTimestamp = new Date();
+        DatePickerTimestamp.set('maxDate', currentTimestamp);
+        if (dateStr === "") {
+          instance.setDate(currentTimestamp);
+          setSelectedValue(Math.floor(currentTimestamp.getTime() / 1000));
+        }
+      }
+      if (inputId == 'get_location_history_form_input_starttime') 
+      {
+        currentTimestamp = new Date();
+        DatePickerStartTime.set('maxDate', currentTimestamp);
+        if (dateStr === "") {
+          instance.setDate(new Date(2025,5,2, 2,0,0));
+          setSelectedValue(Math.floor(currentTimestamp.getTime() / 1000));
+        }
+      }
+      if (inputId == 'get_location_history_form_input_stoptime') 
+      {
+        currentTimestamp = new Date();
+        DatePickerStopTime.set('maxDate', currentTimestamp);
+        if (dateStr === "") {
+          instance.setDate(currentTimestamp);
+          setSelectedValue(Math.floor(currentTimestamp.getTime() / 1000));
+        }
       }
     }
   });
