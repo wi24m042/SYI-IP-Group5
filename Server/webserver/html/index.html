@@ -9,439 +9,75 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=folder_code" />
   <link rel="stylesheet" href="resources/leaflet.icon-material.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      background-color: #72777A;
-      font-family: Arial, sans-serif;
-    }
-    #PHSicon_container {
-      text-align: center; 
-      margin-top: 20px;
-    }
-    #PHSicon {
-      height: 80px;
-      width: 80px;
-    }
-    .material-symbols-outlined {
-      font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 48
-    }
-    #github {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: white;
-    font-size: 1.5em;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    }
-    #folder_code_icon{
-      margin-right: 5px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 3em;
-      color: #8BB31D;
-      margin-bottom: 0px;
-    }
-    h2 {
-      text-align: center;
-      font-size: 2em;
-      color: #00649C;
-    }
-    form {
-      font-size: 1.5em;
-    }
-    fieldset {
-      border-radius: 8px;
-      border-width: 5px;
-      border-style: solid;
-    }
-    #coordinates {
-      margin: 0;
-      padding: 10px;
-    }
-    #map {
-      flex: 1 1 auto;
-      width: 100%;
-      min-height: 0;
-      min-height: 500px;
-    }
-    #main_form {
-      display: flex;
-      margin-top: 50px;
-      margin-bottom: 50px;
-    }
-    .form {
-      width: 20%;
-      margin-left: 10%;
-      color: #8BB31D;
-    }
-    .form_legend {
-      color: white;
-    }
-    .input_datetime {
-      font-size: 1em;
-      background-color: #72777A;
-      border-color: white;
-      border-radius: 8px;
-      border-style: solid;
-      color: #8BB31D;
-      margin-bottom: 15px;
-      width: 100%;
-    }
-    input::placeholder {
-      color: #8BB31D;
-      opacity: 1;
-    }
-    .button_submit {
-      font-size: 1em;
-      border-radius: 8px;
-      background-color: white;
-      color:#00649C;
-      border: 2px solid #00649C;
-    }
-  </style>
+  <!-- Bootstrap 5 CDN -->
+   <!--update-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="frontend/styles.css">
 </head>
 <body>
-<a href="https://github.com/wi24m042/SYI-IP-Group5"><div id="github"><span class="material-symbols-outlined" id="folder_code_icon">folder_code</span> GitHub</div></a>
-<div id="PHSicon_container">
-  <a href="/"><img src="/resources/PHS_icon-small.png" alt="ISS Icon" id="PHSicon"></a>
+
+<header>
+  <div class="d-flex align-items-center">
+    <img src="./resources/PHS_icon-small.png" alt="ISS Icon" style="height: 40px;" class="me-3">
+    <div>
+      <h1>Position History Service for ISS</h1>
+      <h3>SYI Integration Project Group 5</h3>
+    </div>
+  </div>
+  <a href="https://github.com/wi24m042/SYI-IP-Group5" class="text-decoration-none d-flex align-items-center" style="color: var(--header-text);">
+    <span class="material-symbols-outlined me-1">folder_code</span> GitHub
+  </a>
+</header>
+
+<div class="container-fluid px-0">
+<div id="sidebarWrapper" class="d-flex flex-row w-100" style="height: calc(100vh - 80px);">
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar sidebar-visible">
+      <button class="btn btn-outline-light d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar">✕</button>
+      <form>
+        <fieldset class="mb-4 border border-light p-2">
+          <legend class="form_legend">Choose a protocol:</legend>
+          <div class="form-check">
+            <input type="radio" id="radio_rest" name="choice" value="rest" class="form-check-input" checked>
+            <label for="radio_rest" class="form-check-label">REST API via webserver</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="radio_soap" name="choice" value="soap" class="form-check-input">
+            <label for="radio_soap" class="form-check-label">SOAP via api provider</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="mb-4 border border-light p-2">
+          <legend class="form_legend">Get Location History:</legend>
+          <input type="text" id="get_location_history_form_input_starttime" class="form-control input_datetime mb-2" placeholder="Click to select Start Time">
+          <input type="text" id="get_location_history_form_input_stoptime" class="form-control input_datetime mb-2" placeholder="Click to select Stop Time">
+          <button id="get_location_history_form_button_submit" class="btn btn-light w-100" type="button">Submit</button>
+        </fieldset>
+
+        <fieldset class="border border-light p-2">
+          <legend class="form_legend">Get Closest Entry By Timestamp:</legend>
+          <input type="text" id="get_closest_entry_by_timestamp_form_input_timestamp" class="form-control input_datetime mb-2" placeholder="Click to select Timestamp">
+          <button id="get_closest_entry_by_timestamp_form_button_submit" class="btn btn-light w-100" type="button">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+    <button id="sidebarToggle" class="btn btn-outline-light" type="button">
+      <span id="toggleIcon">◀</span>
+    </button>
+    <!-- Map area -->
+    <div class="flex-grow-1 position-relative">
+      <div id="map" class="h-100 w-100"></div>
+    </div>
+  </div>
 </div>
-<h1>
-  Position History Service for ISS
-</h1>
-<h2>
-  SYI Integration Project Group 5
-</h2>
-<div id="main_form">
-  <div id="protocol_form" class="form">
-    <form>
-      <fieldset>
-        <legend class="form_legend">Choose a protocol:</legend>
-        <div>
-          <input type="radio" id="radio_rest" name="choice" value="rest" checked>
-          <label for="radio_rest">REST API via webserver</label>
-        </div>
-        <div>
-          <input type="radio" id="radio_soap" name="choice" value="soap">
-          <label for="radio_soap">SOAP via api provider</label>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-  <div id="get_location_history_form" class="form">
-    <form>
-      <fieldset>
-        <legend class="form_legend">Get Location History:</legend>
-        <div>
-          <input type="text" id="get_location_history_form_input_starttime" class="input_datetime" placeholder="Click to select Start Time">
-        </div>
-        <div>
-          <input type="text" id="get_location_history_form_input_stoptime" class="input_datetime" placeholder="Click to select Stop Time">
-        </div>
-        <div>
-          <button id="get_location_history_form_button_submit" class="button_submit" type="button">Submit</button>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-  <div id="get_closest_entry_by_timestamp_form" class="form">
-    <form>
-      <fieldset>
-        <legend class="form_legend">Get Closest Entry By Timestamp:</legend>
-        <div>
-          <input type="text" id="get_closest_entry_by_timestamp_form_input_timestamp" class="input_datetime" placeholder="Click to select Timestamp">
-        </div>
-        <div>
-          <button id="get_closest_entry_by_timestamp_form_button_submit" class="button_submit" type="button">Submit</button>
-        </div>
-      </fieldset>
-    </form>
-  </div>
-</div>
-<div id="map"></div>
+
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="resources/leaflet.icon-material.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-var map, marker;
-var selectedTimestamp = null;
-var selectedStartTime = null;
-var selectedStopTime = null;
-var DatePickerTimestamp = null;
-var DatePickerStartTime = null;
-var DatePickerStopTime = null;
-var issMarkers = [];
+<script src="frontend/script.js"></script>
 
-const RestHeaders = new Headers();
-RestHeaders.append('Content-Type', 'application/json');
-
-const HomeIcon = L.IconMaterial.icon(
-{
-  icon: 'home',
-  iconColor: 'black',
-  markerColor: '#00649C',
-  outlineColor: '#72777A',
-  outlineWidth: 1,
-  iconSize: [31, 42]
-});
-
-const SatelliteIcon = L.IconMaterial.icon(
-{
-  icon: 'satellite_alt',
-  iconColor: 'black',
-  markerColor: '#8BB31D',
-  outlineColor: '#72777A',
-  outlineWidth: 1,
-  iconSize: [31, 42]
-});
-
-function createMap(position)
-{
-  var lat = position.coords.latitude;
-  var lon = position.coords.longitude;
-
-  map = L.map('map').setView([lat, lon], 2);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
-    {
-      maxZoom: 19,
-      attribution: '© OpenStreetMap | Position History Service for ISS by SYI Integration Project Group 5',
-    }
-  ).addTo(map);
-
-  marker = L.marker([lat, lon], {icon: HomeIcon}).addTo(map).bindPopup("You are here!<br>Latitude: " + lat + "<br>Longitude: " + lon).bindTooltip("You are here!<br>Latitude: " + lat + "<br>Longitude: " + lon);
-}
-
-function handleLocationError(error) 
-{
-  alert("Error getting location: " + error.message + "\nPlease allow location access to see your position on the map.");
-  location.reload();
-}
-
-function getLocation() 
-{
-  if (navigator.geolocation)
-  {
-    navigator.geolocation.getCurrentPosition(createMap, handleLocationError);
-  } 
-  else 
-  {
-    alert("Geolocation is not supported by this browser.");
-  }
-}
-
-async function perform_rest_request(RestRequest)
-{
-  console.log("Performing REST request:", RestRequest);
-  const RestResponse = await fetch(RestRequest);
-  const JSON_List = await RestResponse.json();
-  console.log("REST response JSON:", JSON_List);
-  JSON_List.forEach(entry => 
-  {
-    const timestamp = entry.timestamp;
-    const latitude = entry.latitude;
-    const longitude = entry.longitude;
-    const source = entry.source;
-    const timestamp_human_readable = new Date(timestamp * 1000).toLocaleString();
-    issMarker = L.marker([latitude, longitude], {icon: SatelliteIcon}).addTo(map).bindPopup("Latitude: " + latitude + "<br>Longitude: " + longitude + "<br>Timestamp: " + timestamp_human_readable + "<br>Source: " + source).bindTooltip("Latitude: " + latitude + "<br>Longitude: " + longitude + "<br>Timestamp: " + timestamp_human_readable + "<br>Source: " + source);
-    issMarkers.push(issMarker);
-  });  
-}
-
-async function perform_soap_request(SoapBody, ResponseNamespace) 
-{
-  console.log("Performing SOAP request with body:", SoapBody);
-  const SoapResponse = await fetch('https://ntgddns.asuscomm.com:8000/', 
-  {
-    method: 'POST',
-    headers: 
-    {
-      'Content-Type': 'application/soap+xml;'
-    },
-    body: SoapBody
-  });
-
-  const SoapResponseContent = await SoapResponse.text();
-  const XmlParser = new DOMParser();
-  const XmlDoc = XmlParser.parseFromString(SoapResponseContent, "application/xml");
-  const XmlEntries = XmlDoc.getElementsByTagNameNS("*", ResponseNamespace);
-  console.log("SOAP response XML:", XmlEntries);
-  Array.from(XmlEntries).forEach(entry => 
-  {
-    const timestamp = parseInt(entry.getElementsByTagNameNS("*", "timestamp")[0].textContent);
-    const latitude = parseFloat(entry.getElementsByTagNameNS("*", "latitude")[0].textContent);
-    const longitude = parseFloat(entry.getElementsByTagNameNS("*", "longitude")[0].textContent);
-    const source = entry.getElementsByTagNameNS("*", "source")[0].textContent;
-
-    const timestamp_human_readable = new Date(timestamp * 1000).toLocaleString();
-    issMarker = L.marker([latitude, longitude], {icon: SatelliteIcon}).addTo(map).bindPopup("Latitude: " + latitude + "<br>Longitude: " + longitude + "<br>Timestamp: " + timestamp_human_readable + "<br>Source: " + source).bindTooltip("Latitude: " + latitude + "<br>Longitude: " + longitude + "<br>Timestamp: " + timestamp_human_readable + "<br>Source: " + source);
-    issMarkers.push(issMarker);
-  });
-}
-
-function get_location_history()
-{  
-  console.log("Getting location history from " + selectedStartTime + " to " + selectedStopTime);
-  const selectedOption = document.querySelector('input[name="choice"]:checked');
-  if (selectedOption.value == "rest")
-  {
-    const RestRequest = new Request(
-      location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_location_history", 
-      {
-        method: 'POST',
-        body: JSON.stringify({"PositionHistoryService": {"GetLocationHistory": {"StartTime": selectedStartTime, "StopTime": selectedStopTime}}}),
-        headers: RestHeaders,
-      }
-    );
-    perform_rest_request(RestRequest);
-  }
-  else if (selectedOption.value == "soap")
-  {
-    const SoapBody = `
-      <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                        xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-        <soap12:Body>
-          <GetLocationHistory xmlns="http://technikum-wien.at/mwi/integration-project/group5/position-history-service">
-            <start_time>${selectedStartTime}</start_time>
-            <stop_time>${selectedStopTime}</stop_time>
-          </GetLocationHistory>
-        </soap12:Body>
-      </soap12:Envelope>
-    `;
-    perform_soap_request(SoapBody, "LocationRecord");
-  }
-}
-
-function get_closest_entry_by_timestamp()
-{
-  console.log("Getting closest entry by timestamp:", selectedTimestamp);
-  const selectedOption = document.querySelector('input[name="choice"]:checked');
-  if (selectedOption.value == "rest")
-  {
-    const RestRequest = new Request(
-      location.protocol + "//" + location.hostname + ":" + location.port + "/api/get_closest_entry_by_timestamp", 
-      {
-        method: 'POST',
-        body: JSON.stringify({"PositionHistoryService": {"GetClosestEntryByTimestamp": {"Timestamp": selectedTimestamp}}}),
-        headers: RestHeaders,
-      }
-    );
-    perform_rest_request(RestRequest);
-  }
-  else if (selectedOption.value == "soap")
-  {
-    const SoapBody = `
-      <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                        xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-        <soap12:Body>
-          <GetClosestEntryByTimestamp xmlns="http://technikum-wien.at/mwi/integration-project/group5/position-history-service">
-            <timestamp>${selectedTimestamp}</timestamp>
-          </GetClosestEntryByTimestamp>
-        </soap12:Body>
-      </soap12:Envelope>
-    `;
-    perform_soap_request(SoapBody, "GetClosestEntryByTimestampResult");
-  }
-}
-
-function removeIssMarkers() 
-{
-  issMarkers.forEach(marker => map.removeLayer(marker));
-  issMarkers = [];
-}
-
-function configureDateTimePicker(inputId, input, setSelectedValue) 
-{
-  var thisFlatpickr = flatpickr(input, 
-  {
-    enableTime: true,
-    dateFormat: "d.m.Y H:i",
-    time_24hr: true,
-    maxDate: new Date(),
-    onChange: function(selectedDates) 
-    {
-      if (selectedDates.length > 0) 
-      {
-        setSelectedValue(Math.floor(selectedDates[0].getTime() / 1000));
-      } 
-      else 
-      {
-        setSelectedValue(null);
-      }
-      if (inputId == 'get_location_history_form_input_starttime' && DatePickerStopTime) 
-      {
-        DatePickerStopTime.set('minDate', selectedDates[0] || null);
-      }
-      if (inputId == 'get_location_history_form_input_stoptime' && DatePickerStartTime) 
-      {
-        DatePickerStartTime.set('maxDate', selectedDates[0] || null);
-      }
-    }
-  });
-  return thisFlatpickr;
-}
-
-function configureDateTimePickerInstance(inputId, setSelectedValue, dateTimePicker) 
-{
-  var setSelectedValueLocal = null;
-  const input = document.getElementById(inputId);
-  const dateTimePickerLocal = configureDateTimePicker(inputId, input, val => setSelectedValueLocal = setSelectedValue(val));
-  input.addEventListener('focus', function() 
-  {
-    dateTimePickerLocal;
-  });
-  dateTimePicker(dateTimePickerLocal);
-}
-
-function configureSubmitButton(buttonId, isValid, onSubmit) 
-{
-  document.getElementById(buttonId).addEventListener('click', function() 
-  {
-    if (isValid()) 
-    {
-      removeIssMarkers();
-      onSubmit();
-    } 
-    else 
-    {
-      console.log("No date selected.");
-    }
-  });
-}
-
-window.onload = function() 
-{
-  getLocation();
-  configureDateTimePickerInstance('get_closest_entry_by_timestamp_form_input_timestamp', val => selectedTimestamp = val, val => DatePickerTimestamp = val);
-  configureDateTimePickerInstance('get_location_history_form_input_starttime', val => selectedStartTime = val, val => DatePickerStartTime = val);
-  configureDateTimePickerInstance('get_location_history_form_input_stoptime', val => selectedStopTime = val, val => DatePickerStopTime = val);
-  configureSubmitButton(
-    'get_closest_entry_by_timestamp_form_button_submit',
-    () => !!selectedTimestamp,
-    () => get_closest_entry_by_timestamp()
-  );
-  configureSubmitButton(
-    'get_location_history_form_button_submit',
-    () => !!selectedStartTime && !!selectedStopTime,
-    () => get_location_history()
-  );
-};
-</script>
 </body>
 </html>
