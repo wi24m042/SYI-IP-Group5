@@ -2332,3 +2332,91 @@
 2025-06-08 17:32:02,364 INFO: Successfully fetched, validated and converted ISS data.
 2025-06-08 17:32:02,365 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=39.2669,longitude=-1.2373 1749396721000000000
 2025-06-08 17:32:02,379 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:33:00,393 INFO: Wakeup time: 2025-06-08 17:33:00
+2025-06-08 17:33:11,989 INFO: API request was successful with status code: 200
+2025-06-08 17:33:11,989 INFO: API response content is: {'iss_position': {'longitude': '2.9618', 'latitude': '36.4874'}, 'timestamp': 1749396791, 'message': 'success'}
+2025-06-08 17:33:11,992 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:33:11,992 INFO: API response message is 'success'.
+2025-06-08 17:33:11,992 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:33:11,993 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=36.4874,longitude=2.9618 1749396791000000000
+2025-06-08 17:33:12,005 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:34:00,018 INFO: Wakeup time: 2025-06-08 17:34:00
+2025-06-08 17:34:00,380 INFO: API request was successful with status code: 200
+2025-06-08 17:34:00,380 INFO: API response content is: {'iss_position': {'longitude': '5.7002', 'latitude': '34.4535'}, 'timestamp': 1749396840, 'message': 'success'}
+2025-06-08 17:34:00,383 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:34:00,383 INFO: API response message is 'success'.
+2025-06-08 17:34:00,383 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:34:00,384 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=34.4535,longitude=5.7002 1749396840000000000
+2025-06-08 17:34:00,396 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:35:00,411 INFO: Wakeup time: 2025-06-08 17:35:00
+2025-06-08 17:35:00,775 INFO: API request was successful with status code: 200
+2025-06-08 17:35:00,776 INFO: API response content is: {'iss_position': {'longitude': '8.9184', 'latitude': '31.8230'}, 'timestamp': 1749396900, 'message': 'success'}
+2025-06-08 17:35:00,778 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:35:00,778 INFO: API response message is 'success'.
+2025-06-08 17:35:00,778 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:35:00,779 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=31.823,longitude=8.9184 1749396900000000000
+2025-06-08 17:35:00,790 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:36:00,806 INFO: Wakeup time: 2025-06-08 17:36:00
+2025-06-08 17:36:01,171 INFO: API request was successful with status code: 200
+2025-06-08 17:36:01,171 INFO: API response content is: {'iss_position': {'longitude': '11.9165', 'latitude': '29.1264'}, 'timestamp': 1749396960, 'message': 'success'}
+2025-06-08 17:36:01,174 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:36:01,174 INFO: API response message is 'success'.
+2025-06-08 17:36:01,174 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:36:01,175 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=29.1264,longitude=11.9165 1749396960000000000
+2025-06-08 17:36:01,186 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:37:00,201 INFO: Wakeup time: 2025-06-08 17:37:00
+2025-06-08 17:37:01,621 INFO: API request was successful with status code: 200
+2025-06-08 17:37:01,621 INFO: API response content is: {'iss_position': {'longitude': '14.7687', 'latitude': '26.3322'}, 'timestamp': 1749397021, 'message': 'success'}
+2025-06-08 17:37:01,624 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:37:01,624 INFO: API response message is 'success'.
+2025-06-08 17:37:01,624 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:37:01,625 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=26.3322,longitude=14.7687 1749397021000000000
+2025-06-08 17:37:01,638 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:38:00,653 INFO: Wakeup time: 2025-06-08 17:38:00
+2025-06-08 17:38:01,017 INFO: API request was successful with status code: 200
+2025-06-08 17:38:01,017 INFO: API response content is: {'iss_position': {'longitude': '17.4071', 'latitude': '23.5458'}, 'timestamp': 1749397080, 'message': 'success'}
+2025-06-08 17:38:01,019 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:38:01,020 INFO: API response message is 'success'.
+2025-06-08 17:38:01,020 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:38:01,020 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=23.5458,longitude=17.4071 1749397080000000000
+2025-06-08 17:38:01,032 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:39:00,046 INFO: Wakeup time: 2025-06-08 17:39:00
+2025-06-08 17:39:00,416 INFO: API request was successful with status code: 200
+2025-06-08 17:39:00,416 INFO: API response content is: {'iss_position': {'longitude': '19.9451', 'latitude': '20.6843'}, 'timestamp': 1749397140, 'message': 'success'}
+2025-06-08 17:39:00,418 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:39:00,419 INFO: API response message is 'success'.
+2025-06-08 17:39:00,419 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:39:00,419 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=20.6843,longitude=19.9451 1749397140000000000
+2025-06-08 17:39:00,431 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:40:00,446 INFO: Wakeup time: 2025-06-08 17:40:00
+2025-06-08 17:40:00,809 INFO: API request was successful with status code: 200
+2025-06-08 17:40:00,810 INFO: API response content is: {'iss_position': {'longitude': '22.4191', 'latitude': '17.7306'}, 'timestamp': 1749397200, 'message': 'success'}
+2025-06-08 17:40:00,812 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:40:00,812 INFO: API response message is 'success'.
+2025-06-08 17:40:00,812 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:40:00,813 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=17.7306,longitude=22.4191 1749397200000000000
+2025-06-08 17:40:00,827 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:41:00,842 INFO: Wakeup time: 2025-06-08 17:41:00
+2025-06-08 17:41:02,261 INFO: API request was successful with status code: 200
+2025-06-08 17:41:02,261 INFO: API response content is: {'iss_position': {'longitude': '24.8230', 'latitude': '14.7158'}, 'timestamp': 1749397261, 'message': 'success'}
+2025-06-08 17:41:02,264 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:41:02,264 INFO: API response message is 'success'.
+2025-06-08 17:41:02,264 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:41:02,265 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=14.7158,longitude=24.823 1749397261000000000
+2025-06-08 17:41:02,278 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:42:00,292 INFO: Wakeup time: 2025-06-08 17:42:00
+2025-06-08 17:42:00,657 INFO: API request was successful with status code: 200
+2025-06-08 17:42:00,657 INFO: API response content is: {'iss_position': {'longitude': '27.0594', 'latitude': '11.7971'}, 'timestamp': 1749397320, 'message': 'success'}
+2025-06-08 17:42:00,660 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:42:00,660 INFO: API response message is 'success'.
+2025-06-08 17:42:00,660 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:42:00,661 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=11.7971,longitude=27.0594 1749397320000000000
+2025-06-08 17:42:00,675 INFO: Data successfully written to InfluxDB.
+2025-06-08 17:43:00,690 INFO: Wakeup time: 2025-06-08 17:43:00
+2025-06-08 17:43:01,054 INFO: API request was successful with status code: 200
+2025-06-08 17:43:01,054 INFO: API response content is: {'iss_position': {'longitude': '29.3170', 'latitude': '8.7566'}, 'timestamp': 1749397380, 'message': 'success'}
+2025-06-08 17:43:01,057 INFO: API response is valid according to the JSON schema.
+2025-06-08 17:43:01,057 INFO: API response message is 'success'.
+2025-06-08 17:43:01,057 INFO: Successfully fetched, validated and converted ISS data.
+2025-06-08 17:43:01,058 INFO: Final data to be written to InfluxDB: iss_position_measurement,source=open-notify.org latitude=8.7566,longitude=29.317 1749397380000000000
+2025-06-08 17:43:01,072 INFO: Data successfully written to InfluxDB.
