@@ -32,18 +32,14 @@ const SatelliteIcon = L.IconMaterial.icon(
   iconSize: [31, 42]
 });
 
-function createMap(position)
+function createMap()
 {
-  var lat = position.coords.latitude;
-  var lon = position.coords.longitude;
-
-  //map = L.map('map').setView([lat, lon], 2);
-map = L.map('map', {
-  zoomControl: false,
-  worldCopyJump: false, 
-  maxBounds: [[-85, -180], [85, 180]], 
-  maxBoundsViscosity: 1.0 
-}).setView([lat, lon], 2);
+  map = L.map('map', {
+    zoomControl: false,
+    worldCopyJump: false, 
+    maxBounds: [[-85, -180], [85, 180]], 
+    maxBoundsViscosity: 1.0 
+  }).setView([0, 0], 2);
 
   L.control.zoom({ position: 'bottomright' }).addTo(map);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
@@ -52,21 +48,27 @@ map = L.map('map', {
       attribution: '© OpenStreetMap | Position History Service for ISS by SYI Integration Project Group 5',
     }
   ).addTo(map);
+}
+
+function addUserLocationMarker(position)
+{
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
 
   marker = L.marker([lat, lon], {icon: HomeIcon}).addTo(map).bindPopup("You are here!<br>Latitude: " + lat + "<br>Longitude: " + lon).bindTooltip("You are here!<br>Latitude: " + lat + "<br>Longitude: " + lon);
+  map.setView([lat, lon], 2);
 }
 
 function handleLocationError(error) 
 {
-  alert("Error getting location: " + error.message + "\nPlease allow location access to see your position on the map.");
-  location.reload();
+  console.log("Error getting location: " + error.message);
 }
 
 function getLocation() 
 {
   if (navigator.geolocation)
   {
-    navigator.geolocation.getCurrentPosition(createMap, handleLocationError);
+    navigator.geolocation.getCurrentPosition(addUserLocationMarker, handleLocationError);
   } 
   else 
   {
@@ -310,6 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.onload = function() 
 {
+  createMap();
   getLocation();
   configureDateTimePickerInstance('get_closest_entry_by_timestamp_form_input_timestamp', val => selectedTimestamp = val, val => DatePickerTimestamp = val);
   configureDateTimePickerInstance('get_location_history_form_input_starttime', val => selectedStartTime = val, val => DatePickerStartTime = val);
