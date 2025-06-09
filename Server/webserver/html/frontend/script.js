@@ -9,6 +9,8 @@ var issMarkers = [];
 console.log
 const RestHeaders = new Headers();
 RestHeaders.append('Content-Type', 'application/json');
+const SOAPHeaders = new Headers();
+SOAPHeaders.append('Content-Type', 'application/soap+xml');
 
 const HomeIcon = L.IconMaterial.icon(
 {
@@ -96,10 +98,7 @@ async function perform_soap_request(SoapBody, ResponseNamespace)
   const SoapResponse = await fetch('https://ntgddns.asuscomm.com:8000/', 
   {
     method: 'POST',
-    headers: 
-    {
-      'Content-Type': 'application/soap+xml;'
-    },
+    headers: SOAPHeaders,
     body: SoapBody
   });
 
@@ -198,11 +197,14 @@ function configureDateTimePicker(inputId, input, setSelectedValue)
 {
   var thisFlatpickr = flatpickr(input, 
   {
+    locale: {
+        firstDayOfWeek: 1
+    },
     enableTime: true,
     dateFormat: "d.m.Y H:i",
     time_24hr: true,
     minuteIncrement: 1,
-    minDate: new Date(2025,5,2, 2,0,0),
+    minDate: new Date(2025,5,3, 2,0,0),
     onChange: function(selectedDates) 
     {
       if (selectedDates.length > 0) 
@@ -238,7 +240,7 @@ function configureDateTimePicker(inputId, input, setSelectedValue)
         currentTimestamp = new Date();
         DatePickerStartTime.set('maxDate', currentTimestamp);
         if (dateStr === "") {
-          instance.setDate(new Date(2025,5,2, 2,0,0));
+          instance.setDate(new Date(2025,5,3, 2,0,0));
           setSelectedValue(Math.floor(currentTimestamp.getTime() / 1000));
         }
       }
