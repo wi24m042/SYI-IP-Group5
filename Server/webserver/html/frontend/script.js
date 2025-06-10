@@ -288,7 +288,6 @@ function configureSubmitButton(buttonId, isValid, onSubmit)
   });
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.getElementById("sidebar");
   const toggleBtn = document.getElementById("sidebarToggle");
@@ -307,8 +306,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 310);
   });
 });
-
-
 
 window.onload = function() 
 {

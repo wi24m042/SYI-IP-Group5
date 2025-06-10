@@ -12,7 +12,4 @@ WORKDIR "/spyne"
 RUN /fhtw-venv/bin/python3 -m build
 WORKDIR "/"
 RUN fhtw-venv/bin/pip3 install spyne/dist/spyne-2.15.0a0-py3-none-any.whl
-#COPY docker-entrypoint.sh /docker-entrypoint.sh
-#CMD chmod +x /docker-entrypoint.sh
-#ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD fhtw-venv/bin/python3 api-provider.py > /iss-tracker.log 2>&1
