@@ -1,5 +1,13 @@
-# SYI-IP-Group5
-Systems Integration - Integration Project - Group 5
+# Systems Integration - Integration Project - Group 5
+## Description
+Our system gathers and stores where the ISS (International Space Station) is about once a minute from the Open Notify API.
+The users can request the stored data with a SOAP API and a REST API.
+
+## Use case ISS location history
+The users can request where the ISS was within a time range. The system will return all relavant datapoints to the users.
+
+## Use case ISS location closest to a specified timestamp
+The users can request where the ISS was at a specific point in time. The system will return the closest entry to the user.
 
 # Logical Overview
 ![LogicalOverview](LogicalOverview.drawio.png)
@@ -79,6 +87,9 @@ The webserver container consists of an Ubuntu OS image as its base and a custom 
 
 ## Website
 The website is provided via the webserver. It was created with HTML, CSS and JavaScript. To make the webdesign a bit easier the front-end framework [bootstrap CSS and JS via jsdelivr CDN](https://www.jsdelivr.com/package/npm/bootstrap) was used. To make selecting timestamps easy for the user the date and time picker [flatpickr CSS and JS via jsdelivr CDN](https://www.jsdelivr.com/package/npm/flatpickr) was used. The website can request data from both the REST API and the SOAP API depending on what the user wants to use. The data resulting from the requests are displayed on an OpenStreetMap map with the library [leaflet CSS and JavaScript via jsdelivr CDN](https://www.jsdelivr.com/package/npm/leaflet) was used. Icons for the map markers are [Google Material Icons](https://fonts.google.com/icons?family=Material+Icons) and they were added with the [Leaflet.IconMaterial CSS and JavaScript library](https://github.com/ilyankou/Leaflet.IconMaterial). Every time the user performs a request the previous data is cleared from the map. Optionally the user can choose to display their location on the map as well.
+
+## PositionHistoryServiceClient
+This is a Python CLI client for communication with the SOAP service. It's an extended version of a demo program to test the SOAP client communication with Python for the webserver. It also uses the [zeep library](https://pypi.org/project/zeep/) and the [requests library](https://pypi.org/project/requests/) for the communication with the SOAP service. Additionally, the [click library](https://pypi.org/project/click/) was used for the CLI interface. 
 
 # Hardware Setup
 ## Physical Overview
